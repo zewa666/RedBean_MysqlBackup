@@ -1,4 +1,4 @@
-RedBean_MysqlBackup (RevisionBean)
+RedBean_MysqlBackup
 =======================
 
 This is a plugin for the [RedBeanPHP ORM](http://www.redbeanphp.com/), which
