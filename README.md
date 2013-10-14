@@ -39,6 +39,10 @@ Usage:
 
 Usage is quite simply since the use of R::ext() in RedBean 3.5.
 
+- Create the folder where you'd like to have the backup-files created in manually.
+- Set permissions on folder to allow php to create files in it
+- Execute your desired way of backup-creation (see code below)
+
 ```php
    // create backup-file with auto name into folder backup
   R::performMysqlBackup("backup");
