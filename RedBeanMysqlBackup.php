@@ -47,7 +47,10 @@ class RedBean_MysqlBackup implements RedBean_Plugin
         $parts = array();
         foreach($fields as $key => $field)
         {
-          $parts[] = '"'.$row[$key].'"';
+          if($row[$key] == null)
+            $parts[] = 'NULL';
+          else
+            $parts[] = '"'.$row[$key].'"';
         }
 
         $write .=  implode(",", $parts) . ");\n";
