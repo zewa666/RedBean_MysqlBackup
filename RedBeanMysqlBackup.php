@@ -32,7 +32,10 @@ class RedBean_MysqlBackup implements RedBean_Plugin
 
     foreach($tables as $table)
     {
-      $result = R::getAll('SELECT * FROM '.$table);
+      $pdo = R::getDatabaseAdapter()->getDatabase()->getPDO();
+      $query = $pdo->prepare('SELECT * FROM '.$table);
+      $query->execute();
+      /*$result = $query->fetchAll();*/
       $fields = R::inspect($table);
       $num_fields = count($fields);
 
@@ -41,7 +44,8 @@ class RedBean_MysqlBackup implements RedBean_Plugin
       $write .= "\n\n".$row2['Create Table'].";\n\n";
 
 
-      foreach($result as $row)
+      /*foreach($result as $row)*/
+      do
       {
         $write .= 'INSERT INTO '.$table.' VALUES(';
         $parts = array();
@@ -54,7 +58,7 @@ class RedBean_MysqlBackup implements RedBean_Plugin
         }
 
         $write .=  implode(",", $parts) . ");\n";
-      }
+      } while ($row = $query->fetch());
 
       $write .="\n\n\n";
     }
